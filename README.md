@@ -6,8 +6,7 @@ Inspired by [Andrew Huang](https://www.youtube.com/watch?v=4IAZY7JdSHU).
 
 ## Contributors
 
-Dan Cusher
-dan at dan cusher dot com
+Dan Cusher, dan at dan cusher dot com
 
 ## License
 
