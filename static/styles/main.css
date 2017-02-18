@@ -1,0 +1,38 @@
+body {
+    background-color: #eef;
+    color: #226;
+}
+
+.jumbotron {
+	margin: 0px auto;
+	padding: 20px 20px;
+	background: #226;
+	color: #eef;
+}
+
+a, a:visited {
+    text-decoration: none;
+    font-weight: bold;
+    color: #4c4;
+}
+
+a:hover, a:active {
+    text-decoration: none;
+    font-weight: bold;
+    color: #4c4;
+    text-shadow: 0 0 10px #4c4;
+}
+
+form {
+    border: 2px solid #226;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.btn-primary {
+    background-color: #338;
+}
+
+.btn-primary:hover, .btn-primary:active {
+    background-color: #226;
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Automatic MIDI Inverter</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <header class="container">
+            <div class="jumbotron">
+            <h1>
+                Automatic MIDI Inverter
+            </h1>
+            <p>
+                Makes the high notes low and the low notes high.
+            </p>
+            </div>
+        </header>
+        <article class="container">
+            <div class="row">
+                <section class="col-md-7 col-lg-6">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h2>
+                                Fill out this form
+                            </h2>
+                        </div>
+                    </div>
+                    <form class="form-horizontal" method=POST enctype=multipart/form-data action="{{ url_for('invert') }}">
+                        {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                        <div class="row">
+                            <div class="col-xs-12">
+                                {% for message in messages %}
+                                <div class="alert alert-danger alert-dismissable fade in">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <span>{{ message }}</span>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endwith %}
+                        <div class="form-group row">
+                            <label class="control-label col-xs-5">Select an inversion type</label>
+                            <div class="col-xs-7">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="inversionType" id="inversionTypeMiddle" value="0" checked>
+                                        Use center of range as pivot
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="inversionType" id="inversionTypeFirstNote" value="1">
+                                        Use first note as pivot
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-xs-5" for="midi_file">Select your midi file</label>
+                            <div class="col-xs-7">
+                                <input type="file" name="midi_file" id="midi_file" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-xs-7 col-xs-offset-5">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                <section class="col-md-5 col-lg-6">
+                    <h2>
+                        What is all this?
+                    </h2>
+                    <p>
+                        This is the Automatic MIDI Inverter!  Inspired by <a href="http://andrewhuang.com/">Andrew Huang</a>, the basic idea is to start from the first note and pivot every note from above to below, and vice versa, while keeping the same interval.  For a more detailed explanation and example, watch <a href="https://www.youtube.com/watch?v=4IAZY7JdSHU">Andrew's video about it</a>.
+                    </p>
+                    <p>
+                        I provide two options for how the algorithm inverts the notes.  The first option is Andrew's original idea, where the first note stays the same and all the notes are flipped around that note.  This can result in inversions with much higher or lower pitch ranges than their originals, depending on where the first note is within the range.  The second option finds the pitch in the center of the range and flips everything around that pitch, which keeps the range of the inversion the same as that of the original.
+                    </p>
+                    <p>
+                        If you have any problems with the site, email Dan at Dan Cusher dot com.  The <a href="https://github.com/dscush/midi-inverter">code for all this</a> is open source.
+                    </p>
+                </section>
+            </div>
+        </article>
+    </body>
+</html>
