@@ -36,3 +36,11 @@ form {
 .btn-primary:hover, .btn-primary:active {
     background-color: #226;
 }
+
+span.help-block {
+    display: inline;
+}
+
+.has-tooltip {
+    border-bottom: 1px dotted #000;
+}
