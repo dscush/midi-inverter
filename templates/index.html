@@ -47,13 +47,14 @@
                         {% endif %}
                         {% endwith %}
                         <div class="form-group row">
-                            <label class="control-label col-xs-5">Select an inversion type</label>
-                            <div class="col-xs-7">
+                            <label class="control-label col-sm-5">Select an inversion type</label>
+                            <div class="col-sm-7">
                                 <div class="radio">
                                     <label>
                                         <input type="radio" name="inversionType" id="inversionTypeMiddle" value="0" checked>
                                         Use center of range as pivot
                                     </label>
+                                    <br>
                                     <label>
                                         <input type="radio" name="inversionType" id="inversionTypeFirstNote" value="1">
                                         Use first note as pivot
@@ -62,13 +63,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="control-label col-xs-5" for="midi_file">Select your midi file</label>
-                            <div class="col-xs-7">
+                            <label class="control-label col-sm-5" for="midi_file">Select your midi file</label>
+                            <div class="col-sm-7">
                                 <input type="file" name="midi_file" id="midi_file" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-xs-7 col-xs-offset-5">
+                            <div class="col-sm-7 col-sm-offset-5">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </div>
