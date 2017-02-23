@@ -14,10 +14,9 @@ def invert():
     error = None
     if request.method == 'POST':
         f = request.files['midi_file']
-        inversion_type = int(request.form['inversionType'])
         invert_drums = request.form.get('invertDrums')
         try:
-            inverted_midi = midi_inverter.invert_midi(f, inversion_type, invert_drums)
+            inverted_midi = midi_inverter.invert_midi(f, invert_drums)
         except IOError:
             flash('Invalid midi file - file could be corrupt, or simply not a midi file.')
             return redirect(url_for('index'))

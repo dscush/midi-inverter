@@ -1,18 +1,9 @@
 import mido, tempfile
 
-MIDDLE = 0
-FIRST_NOTE = 1
-
 def invert_around_middle(note, middle_note):
     return note - ((note - middle_note) * 2)
 
-def invert_from_first_note(note, first_note):
-    if note > first_note:
-        return first_note - (note - first_note)
-    else:
-        return first_note + (first_note - note)
-
-def invert_midi(infile, inversion_type=MIDDLE, invert_drums=False):
+def invert_midi(infile, invert_drums=False):
     mid = mido.MidiFile(file = infile)
 
     # Get highest and lowest notes
@@ -34,10 +25,7 @@ def invert_midi(infile, inversion_type=MIDDLE, invert_drums=False):
         if invert_drums or track_num != 10:
             for message in track:
                 if message.type in ('note_on', 'note_off'):
-                    if inversion_type == MIDDLE:
-                        message.note = invert_around_middle(message.note, middle_note)
-                    else:
-                        message.note = invert_from_first_note(message.note, first_note)
+                    message.note = message.note - ((message.note - middle_note) * 2)
     outfile = tempfile.TemporaryFile()
     mid.save(file = outfile)
     outfile.seek(0)
