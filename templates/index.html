@@ -29,7 +29,7 @@
         </header>
         <article class="container">
             <div class="row">
-                <section class="col-md-7 col-lg-6">
+                <section class="col-md-5 col-lg-4">
                     <div class="row">
                         <div class="col-sm-12">
                             <h2>
@@ -37,7 +37,7 @@
                             </h2>
                         </div>
                     </div>
-                    <form class="form-horizontal" method=POST enctype=multipart/form-data action="{{ url_for('invert') }}">
+                    <form method=POST enctype=multipart/form-data action="{{ url_for('invert') }}">
                         {% with messages = get_flashed_messages() %}
                         {% if messages %}
                         <div class="row">
@@ -52,30 +52,26 @@
                         </div>
                         {% endif %}
                         {% endwith %}
-                        <div class="form-group row">
-                            <div class="col-sm-7 col-sm-offset-5">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="invertDrums">
-                                        Invert track 10 <span class="help-block has-tooltip" data-toggle="tooltip" data-placement="right" title="Track 10 is typically percussion, in which case it sounds better un-inverted.">help</span>
-                                    </label>
-                                </div>
+                        <div class="form-group">
+                            <label class="control-label" for="midi_file">Select your midi file</label>
+                            <input type="file" name="midi_file" id="midi_file" required>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="invertDrums">
+                                    Invert track 10 <span class="help-block has-tooltip" data-toggle="tooltip" data-placement="right" title="Track 10 is typically percussion, in which case it sounds better un-inverted.">help</span>
+                                </label>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="control-label col-sm-5" for="midi_file">Select your midi file</label>
-                            <div class="col-sm-7">
-                                <input type="file" name="midi_file" id="midi_file" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-7 col-sm-offset-5">
+                        <div class="form-group">
+                            <div class="">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </div>
                     </form>
                 </section>
-                <section class="col-md-5 col-lg-6">
+                <section class="col-md-7 col-lg-8">
                     <h2>
                         What is all this?
                     </h2>
