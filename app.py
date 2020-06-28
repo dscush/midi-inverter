@@ -1,4 +1,7 @@
 import os
+import tempfile
+import zipfile
+
 from midi_inverter import midi_inverter
 from werkzeug.utils import secure_filename
 from flask import Flask, request, render_template, send_file, flash, url_for, redirect
@@ -23,3 +26,26 @@ def invert():
         inverted_filename = os.path.splitext(secure_filename(f.filename))
         inverted_filename = inverted_filename[0] + "--inverted" + (inverted_filename[1] or '.mid')
         return send_file(inverted_midi, mimetype="audio/midi", as_attachment=True, attachment_filename=inverted_filename)
+
+@app.route('/invert_bulk', methods=['POST'])
+def bulk_invert():
+    files = request.files.getlist('midi_files[]')
+    invert_drums = request.form.get('invertDrums')
+    response_file = tempfile.NamedTemporaryFile()
+    zip = zipfile.ZipFile(response_file, mode='w')
+    for f in files:
+        try:
+            inverted_midi = midi_inverter.invert_midi(f, invert_drums)
+        except IOError:
+            continue
+        inverted_filename = os.path.splitext(secure_filename(f.filename))
+        inverted_filename = inverted_filename[0] + "--inverted" + (inverted_filename[1] or '.mid')
+        zip.writestr(inverted_filename, inverted_midi.read())
+    zip.close()
+    return send_file(
+        zip.filename,
+        mimetype="zip",
+        as_attachment=True,
+        attachment_filename='bulk_inverted_midis.zip'
+    )
+

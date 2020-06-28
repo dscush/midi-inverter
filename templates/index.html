@@ -33,7 +33,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <h2>
-                                Fill out this form
+                                Flip one midi file
                             </h2>
                         </div>
                     </div>
@@ -55,6 +55,34 @@
                         <div class="form-group">
                             <label class="control-label" for="midi_file">Select your midi file</label>
                             <input type="file" name="midi_file" id="midi_file" required>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="invertDrums">
+                                    Invert track 10
+                                </label>
+                                <span class="help-block has-tooltip" data-toggle="tooltip" data-placement="right" title="Track 10 is typically percussion, in which case it sounds better un-inverted.">help</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h2>
+                                Flip several midi files
+                            </h2>
+                        </div>
+                    </div>
+                    <form method=POST enctype=multipart/form-data action="{{ url_for('bulk_invert') }}">
+                        <p>This option accepts multiple files and returns a zip archive containing the inverted files. The files to flip must be in one directory on your computer. Any corrupted files or non-midi files will be skipped.</p>
+                        <div class="form-group">
+                            <label class="control-label" for="midi_files">Select your midi file</label>
+                            <input type="file" name="midi_files[]" id="midi_files" multiple required>
                         </div>
                         <div class="form-group">
                             <div class="checkbox">
