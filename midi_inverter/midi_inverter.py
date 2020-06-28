@@ -18,7 +18,7 @@ def invert_midi(infile, invert_drums=False):
                         first_note = message.note
                     lowest_note = min(lowest_note, message.note)
                     highest_note = max(highest_note, message.note)
-    middle_note = (highest_note + lowest_note) / 2
+    middle_note = int((highest_note + lowest_note) / 2)
 
     # Invert all the notes
     for track_num, track in enumerate(mid.tracks):
