@@ -1,4 +1,4 @@
-Flask==1.0.0
+Flask==2.3.2
 Werkzeug==0.15.3
 mido==1.1.24
 gunicorn==19.6.0
